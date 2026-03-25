@@ -1,0 +1,200 @@
+
+========================================
+EXPLORATION RESULTS
+========================================
+Summary Stats:
+            Row ID                     Order Date                      Ship Date   Postal Code         Sales     Quantity     Discount       Profit  Is_Profitable
+count  9994.000000                           9994                           9994   9994.000000   9994.000000  9994.000000  9994.000000  9994.000000    9994.000000
+mean   4997.500000  2016-04-30 00:07:12.259355648  2016-05-03 23:06:58.571142912  55190.379428    229.858001     3.789574     0.156203    28.656896       0.806284
+min       1.000000            2014-01-03 00:00:00            2014-01-07 00:00:00   1040.000000      0.444000     1.000000     0.000000 -6599.978000       0.000000
+25%    2499.250000            2015-05-23 00:00:00            2015-05-27 00:00:00  23223.000000     17.280000     2.000000     0.000000     1.728750       1.000000
+50%    4997.500000            2016-06-26 00:00:00            2016-06-29 00:00:00  56430.500000     54.490000     3.000000     0.200000     8.666500       1.000000
+75%    7495.750000            2017-05-14 00:00:00            2017-05-18 00:00:00  90008.000000    209.940000     5.000000     0.200000    29.364000       1.000000
+max    9994.000000            2017-12-30 00:00:00            2018-01-05 00:00:00  99301.000000  22638.480000    14.000000     0.800000  8399.976000       1.000000
+std    2885.163629                            NaN                            NaN  32063.693350    623.245101     2.225110     0.206452   234.260108       0.395229
+Regional Sales:
+Region
+Central    501239.8908
+East       678781.2400
+South      391721.9050
+West       725457.8245
+
+========================================
+CLUSTERING RESULTS (K=3)
+========================================
+               Sales       Profit  Customer ID
+Cluster                                       
+0        3717.329432   375.098646          290
+1        1487.256431   104.300547          443
+2        9338.678765  2190.221200           60
+
+========================================
+CLUSTERING RESULTS (K=4)
+========================================
+                Sales       Profit  Customer ID
+Cluster                                        
+0         3323.222561   312.307007          297
+1         1389.027883   101.998852          406
+2        14172.628571  5912.249300            7
+3         7795.783607  1335.476645           83
+
+========================================
+CLUSTERING RESULTS (K=5)
+========================================
+                Sales       Profit  Customer ID
+Cluster                                        
+0         3235.527747   407.512763          279
+1         1369.823110   142.286427          407
+2         6887.305943 -2034.622000           21
+3         7526.035105  1500.394908           80
+4        15042.396667  6247.642450            6
+
+========================================
+CLUSTERING RESULTS (K=6)
+========================================
+                Sales       Profit  Customer ID
+Cluster                                        
+0         8132.311657  1743.374247           60
+1          974.802717    73.891606          266
+2         6726.997764 -1988.447218           22
+3         3875.721205   439.947399          139
+4        15042.396667  6247.642450            6
+5         2576.636867   357.488984          300
+
+========================================
+CLUSTERING RESULTS (K=2)
+========================================
+               Sales       Profit  Customer ID
+Cluster                                       
+0        5847.679176  1015.182419          216
+1        1792.204780   116.321697          577
+
+==================================================
+MODULE III: NAIVE BAYES CLASSIFICATION REPORT
+Accuracy: 0.9325
+--------------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.98      0.65      0.78       377
+           1       0.93      1.00      0.96      1622
+
+    accuracy                           0.93      1999
+   macro avg       0.95      0.83      0.87      1999
+weighted avg       0.94      0.93      0.93      1999
+
+==================================================
+
+MODULE V ASSOCIATION MINING (Support: 0.01, Lift: 0.1)
+            Product_A         Product_B      lift
+111           Storage    Binders, Paper  1.242434
+110    Binders, Paper           Storage  1.242434
+107            Phones    Binders, Paper  1.208336
+102    Binders, Paper            Phones  1.208336
+104     Paper, Phones           Binders  1.174494
+105           Binders     Paper, Phones  1.174494
+71          Fasteners             Paper  1.154125
+70              Paper         Fasteners  1.154125
+103   Binders, Phones             Paper  1.141248
+106             Paper   Binders, Phones  1.141248
+85             Labels           Storage  1.136537
+84            Storage            Labels  1.136537
+109    Storage, Paper           Binders  1.133316
+112           Binders    Storage, Paper  1.133316
+108  Storage, Binders             Paper  1.120114
+113             Paper  Storage, Binders  1.120114
+46            Binders         Fasteners  1.097611
+47          Fasteners           Binders  1.097611
+18            Binders        Appliances  1.097140
+19         Appliances           Binders  1.097140
+
+MODULE V ASSOCIATION MINING (Support: 0.015, Lift: 0.1)
+      Product_A    Product_B      lift
+12      Binders   Appliances  1.097140
+13   Appliances      Binders  1.097140
+28       Phones          Art  1.043833
+29          Art       Phones  1.043833
+55  Furnishings       Phones  1.038458
+54       Phones  Furnishings  1.038458
+19   Appliances       Phones  1.036964
+18       Phones   Appliances  1.036964
+17   Appliances        Paper  1.016458
+16        Paper   Appliances  1.016458
+57  Furnishings      Storage  1.014401
+56      Storage  Furnishings  1.014401
+15  Furnishings   Appliances  1.013129
+14   Appliances  Furnishings  1.013129
+8   Accessories       Phones  0.994169
+9        Phones  Accessories  0.994169
+45  Furnishings       Chairs  0.981667
+44       Chairs  Furnishings  0.981667
+23       Chairs          Art  0.975495
+22          Art       Chairs  0.975495
+
+MODULE V ASSOCIATION MINING (Support: 0.02, Lift: 0.1)
+      Product_A    Product_B      lift
+10      Binders   Appliances  1.097140
+11   Appliances      Binders  1.097140
+18       Phones          Art  1.043833
+19          Art       Phones  1.043833
+35  Furnishings       Phones  1.038458
+34       Phones  Furnishings  1.038458
+13   Appliances        Paper  1.016458
+12        Paper   Appliances  1.016458
+37  Furnishings      Storage  1.014401
+36      Storage  Furnishings  1.014401
+6   Accessories       Phones  0.994169
+7        Phones  Accessories  0.994169
+29      Binders      Storage  0.974826
+28      Storage      Binders  0.974826
+30        Paper       Chairs  0.971110
+31       Chairs        Paper  0.971110
+41        Paper      Storage  0.963470
+40      Storage        Paper  0.963470
+27       Phones      Binders  0.930516
+26      Binders       Phones  0.930516
+
+MODULE V ASSOCIATION MINING (Support: 0.025, Lift: 0.1)
+      Product_A    Product_B      lift
+4       Binders   Appliances  1.097140
+5    Appliances      Binders  1.097140
+23  Furnishings       Phones  1.038458
+22       Phones  Furnishings  1.038458
+25  Furnishings      Storage  1.014401
+24      Storage  Furnishings  1.014401
+16      Storage      Binders  0.974826
+17      Binders      Storage  0.974826
+18        Paper       Chairs  0.971110
+19       Chairs        Paper  0.971110
+29        Paper      Storage  0.963470
+28      Storage        Paper  0.963470
+14      Binders       Phones  0.930516
+15       Phones      Binders  0.930516
+26        Paper       Phones  0.904176
+27       Phones        Paper  0.904176
+2   Accessories        Paper  0.896203
+3         Paper  Accessories  0.896203
+12      Binders        Paper  0.878853
+13        Paper      Binders  0.878853
+
+MODULE V ASSOCIATION MINING (Support: 0.029, Lift: 0.1)
+      Product_A    Product_B      lift
+19  Furnishings       Phones  1.038458
+18       Phones  Furnishings  1.038458
+15      Binders      Storage  0.974826
+14      Storage      Binders  0.974826
+23        Paper      Storage  0.963470
+22      Storage        Paper  0.963470
+13       Phones      Binders  0.930516
+12      Binders       Phones  0.930516
+20        Paper       Phones  0.904176
+21       Phones        Paper  0.904176
+2   Accessories        Paper  0.896203
+3         Paper  Accessories  0.896203
+11        Paper      Binders  0.878853
+10      Binders        Paper  0.878853
+7           Art        Paper  0.863005
+6         Paper          Art  0.863005
+9   Furnishings      Binders  0.859332
+8       Binders  Furnishings  0.859332
+1       Binders  Accessories  0.853486
+0   Accessories      Binders  0.853486
