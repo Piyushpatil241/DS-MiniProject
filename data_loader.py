@@ -4,13 +4,27 @@ import streamlit as st
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv('Superstore.csv', encoding='windows-1252')
+        df = pd.read_csv('HousingData.csv', encoding='windows-1252')
     except:
-        df = pd.read_csv('Superstore.csv', encoding='utf-8')
+        df = pd.read_csv('HousingData.csv', encoding='utf-8')
 
-    df['Order Date'] = pd.to_datetime(df['Order Date'])
-    df['Ship Date'] = pd.to_datetime(df['Ship Date'])
-
-    df['Is_Profitable'] = (df['Profit'] > 0).astype(int)
+    # Select only required columns (safety check)
+    required_cols = [
+        'OverallQual', 'GrLivArea', 'GarageCars', 'GarageArea',
+        'TotalBsmtSF', '1stFlrSF', 'YearBuilt', 'FullBath',
+        'TotRmsAbvGrd', 'Neighborhood', 'HouseStyle', 'SalePrice'
+    ]
     
+    df = df[required_cols]
+
+    # Handle missing values (basic cleaning)
+    df = df.dropna()
+
+    # Optional: Create a new feature (example)
+    df['Price_per_sqft'] = df['SalePrice'] / df['GrLivArea']
+
+    # Optional: Convert categorical columns to category type
+    df['Neighborhood'] = df['Neighborhood'].astype('category')
+    df['HouseStyle'] = df['HouseStyle'].astype('category')
+
     return df

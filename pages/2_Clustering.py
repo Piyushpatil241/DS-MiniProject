@@ -11,42 +11,88 @@ import os
 st.set_page_config(layout="wide")
 st.title("Module IV: Clustering and Outlier Detection")
 
+# ---------------- THEORY ----------------
 st.header("Clustering Theory")
 st.markdown("#### K-Means Partitioning Method")
 st.write("The algorithm minimizes the Within-Cluster Sum of Squares (WCSS):")
 st.latex(r"WCSS = \sum_{i=1}^{k} \sum_{x \in C_i} \|x - \mu_i\|^2")
 
-
-
+# ---------------- DATA ----------------
 df = load_data()
-cust_data = df.groupby('Customer ID').agg({
-    'Sales': 'sum', 'Profit': 'sum', 'Quantity': 'sum'
-}).reset_index()
 
+# Select relevant numerical features for clustering
+features = df[[
+    'OverallQual', 'GrLivArea', 'GarageCars', 'GarageArea',
+    'TotalBsmtSF', '1stFlrSF', 'FullBath', 'TotRmsAbvGrd', 'SalePrice'
+]]
+
+# Scaling
 scaler = StandardScaler()
-scaled_features = scaler.fit_transform(cust_data[['Sales', 'Profit', 'Quantity']])
+scaled_features = scaler.fit_transform(features)
 
+# ---------------- SIDEBAR ----------------
 st.sidebar.header("Algorithm Parameters")
 k_value = st.sidebar.slider("Number of Clusters (k)", 2, 6, 3)
 
+# ---------------- MODEL ----------------
 model = KMeans(n_clusters=k_value, random_state=42, n_init=10)
-cust_data['Cluster'] = model.fit_predict(scaled_features).astype(str)
+df['Cluster'] = model.fit_predict(scaled_features).astype(str)
 
-st.header("Customer Segmentation Visuals")
-st.markdown("#### 2D Sales vs Profit Distribution (Seaborn)")
+# ---------------- VISUALIZATION ----------------
+st.header("House Segmentation Visuals")
+
+# 📊 2D Scatter
+st.markdown("#### Living Area vs Sale Price")
 fig, ax = plt.subplots(figsize=(10, 5))
-sns.scatterplot(data=cust_data, x='Sales', y='Profit', hue='Cluster', palette='viridis', ax=ax)
+sns.scatterplot(
+    data=df,
+    x='GrLivArea',
+    y='SalePrice',
+    hue='Cluster',
+    palette='viridis',
+    ax=ax
+)
 st.pyplot(fig)
 
-st.markdown("#### 3D Feature Space Mapping (Plotly)")
-fig_3d = px.scatter_3d(cust_data, x='Sales', y='Profit', z='Quantity', color='Cluster')
+# 📊 3D Plot
+st.markdown("#### 3D Feature Space Mapping")
+fig_3d = px.scatter_3d(
+    df,
+    x='GrLivArea',
+    y='SalePrice',
+    z='OverallQual',
+    color='Cluster'
+)
 st.plotly_chart(fig_3d, use_container_width=True)
 
+# ---------------- CLUSTER INSIGHTS ----------------
+st.header("Cluster Insights")
+summary = df.groupby('Cluster').agg({
+    'SalePrice': 'mean',
+    'GrLivArea': 'mean',
+    'OverallQual': 'mean',
+    'Cluster': 'count'
+}).rename(columns={'Cluster': 'Count'})
+
+st.dataframe(summary, use_container_width=True)
+
+# ---------------- OUTLIER DETECTION ----------------
+st.header("Outlier Detection (Simple Method)")
+q1 = df['SalePrice'].quantile(0.25)
+q3 = df['SalePrice'].quantile(0.75)
+iqr = q3 - q1
+
+outliers = df[(df['SalePrice'] < q1 - 1.5 * iqr) | (df['SalePrice'] > q3 + 1.5 * iqr)]
+
+st.write(f"Number of Outliers (based on SalePrice): {len(outliers)}")
+
+# ---------------- EXPORT ----------------
 if st.button("Export Clustering Analytics"):
-    summary = cust_data.groupby('Cluster').agg({'Sales': 'mean', 'Profit': 'mean', 'Customer ID': 'count'})
     with open('bi_project_results.txt', 'a') as f:
         f.write("\n" + "="*40 + "\n")
         f.write(f"CLUSTERING RESULTS (K={k_value})\n")
         f.write("="*40 + "\n")
         f.write(summary.to_string() + "\n")
+        f.write(f"\nOutliers Detected: {len(outliers)}\n")
+
     st.success("Analytics appended to bi_project_results.txt")

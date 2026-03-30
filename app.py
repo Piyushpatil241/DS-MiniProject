@@ -1,13 +1,13 @@
 import streamlit as st
 
-st.set_page_config(page_title="Business Intelligence System", layout="wide")
+st.set_page_config(page_title="House Prices Business Intelligence System", layout="wide")
 
-st.title("Business Intelligence Decision Support System")
-st.markdown("### Business Intelligence Lab Project")
+st.title("House Prices Business Intelligence Decision Support System")
+st.markdown("### House Prices Business Intelligence Lab Project")
 
 st.markdown("""
 This application serves as a comprehensive Business Intelligence tool for analyzing 
-retail performance using the Superstore dataset. It covers the end-to-end KDD 
+house prices data using Housing Dataset. It covers the end-to-end KDD 
 (Knowledge Discovery in Databases) process.
 """)
 
@@ -18,12 +18,15 @@ It separates business process data into facts and dimensions.
 """)
 
 st.markdown("#### Schema Architecture")
+
+st.image("StarSchema.png", caption="Star Schema for House Prices Analysis")
 st.markdown("""
-* **Fact Table**: Sales_Fact (Sales, Profit, Quantity, Discount)
-* **Dimension: Product**: Category, Sub-Category, Product Name
-* **Dimension: Customer**: Customer ID, Name, Segment
-* **Dimension: Location**: Region, State, City, Postal Code
-* **Dimension: Time**: Order Date, Ship Date, Quarter, Year
+* **Fact Table**: Fact_HouseSales (house_id, quality_id, garage_id, building_id, area_id, location_id, sales_price)
+* **Dimension: Dim_Building**: building_id, year_built, full_bath, total_rooms
+* **Dimension: Dim_Area**: area_id, gr_liv_area, total_bsmt_sf, first_flr_sf
+* **Dimension: Dim_Location**: Region, State, City, Postal Code
+* **Dimension: Dim_Quality**: quality_id, overall_qual
+* **Dimension: Dim_Garage**: garage_id, garage_cars, garage_area
 """)
 
 
