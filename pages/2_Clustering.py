@@ -41,7 +41,6 @@ df['Cluster'] = model.fit_predict(scaled_features).astype(str)
 # ---------------- VISUALIZATION ----------------
 st.header("House Segmentation Visuals")
 
-# 📊 2D Scatter
 st.markdown("#### Living Area vs Sale Price")
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.scatterplot(
@@ -54,7 +53,6 @@ sns.scatterplot(
 )
 st.pyplot(fig)
 
-# 📊 3D Plot
 st.markdown("#### 3D Feature Space Mapping")
 fig_3d = px.scatter_3d(
     df,
@@ -88,11 +86,11 @@ st.write(f"Number of Outliers (based on SalePrice): {len(outliers)}")
 
 # ---------------- EXPORT ----------------
 if st.button("Export Clustering Analytics"):
-    with open('bi_project_results.txt', 'a') as f:
+    with open('project_results.txt', 'a') as f:
         f.write("\n" + "="*40 + "\n")
         f.write(f"CLUSTERING RESULTS (K={k_value})\n")
         f.write("="*40 + "\n")
         f.write(summary.to_string() + "\n")
         f.write(f"\nOutliers Detected: {len(outliers)}\n")
 
-    st.success("Analytics appended to bi_project_results.txt")
+    st.success("Analytics appended to project_results.txt")

@@ -57,7 +57,6 @@ st.divider()
 # ---------------- VISUALS ----------------
 st.header("Visual Performance Analysis")
 
-# 📊 Price Distribution by Class
 st.markdown("#### Price Class Distribution")
 fig_hist = px.histogram(
     df,
@@ -68,7 +67,6 @@ fig_hist = px.histogram(
 )
 st.plotly_chart(fig_hist, use_container_width=True)
 
-# 📊 Confusion Matrix
 st.markdown("#### Confusion Matrix")
 cm = confusion_matrix(y_test, y_pred)
 
@@ -105,7 +103,7 @@ if st.button("Archive Classification Report"):
 
     report_text = classification_report(y_test, y_pred)
 
-    with open('bi_project_results.txt', 'a') as f:
+    with open('project_results.txt', 'a') as f:
         f.write("\n" + "="*50 + "\n")
         f.write("MODULE III: NAIVE BAYES CLASSIFICATION (HOUSING)\n")
         f.write(f"Accuracy: {acc:.4f}\n")
@@ -113,4 +111,4 @@ if st.button("Archive Classification Report"):
         f.write(report_text + "\n")
         f.write("="*50 + "\n")
 
-    st.success("Analysis report successfully appended to bi_project_results.txt")
+    st.success("Analysis report successfully appended to project_results.txt")

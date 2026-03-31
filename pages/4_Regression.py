@@ -112,7 +112,7 @@ if st.button("Predict Price"):
 
 # ---------------- EXPORT ----------------
 if st.button("Export Regression Results"):
-    with open('bi_project_results.txt', 'a') as f:
+    with open('project_results.txt', 'a') as f:
         f.write("\n" + "="*50 + "\n")
         f.write("MODULE V: REGRESSION RESULTS\n")
         f.write(f"R2 Score: {r2:.4f}\n")

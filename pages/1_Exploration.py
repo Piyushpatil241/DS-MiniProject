@@ -71,10 +71,10 @@ st.pyplot(fig4)
 if st.button("Export Exploration Summary"):
     summary = df.describe().to_string()
     
-    with open('bi_project_results.txt', 'a') as f:
+    with open('project_results.txt', 'a') as f:
         f.write("\n" + "="*40 + "\n")
         f.write("EXPLORATION RESULTS (HOUSING DATA)\n")
         f.write("="*40 + "\n")
         f.write(summary + "\n")
 
-    st.success("Summary appended to bi_project_results.txt")
+    st.success("Summary appended to project_results.txt")
